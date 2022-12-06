@@ -1,0 +1,32 @@
+Found orphan containers (about-me_test_1) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up.
+Starting about-me_react_1 ... 
+Starting about-me_react_1 ... done
+Attaching to about-me_react_1
+[36mreact_1  |[0m 
+[36mreact_1  |[0m > personal@0.1.0 start
+[36mreact_1  |[0m > react-scripts start
+[36mreact_1  |[0m 
+[36mreact_1  |[0m (node:31) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+[36mreact_1  |[0m (Use `node --trace-deprecation ...` to show where the warning was created)
+[36mreact_1  |[0m (node:31) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+[36mreact_1  |[0m Starting the development server...
+[36mreact_1  |[0m 
+[36mreact_1  |[0m Compiled successfully!
+[36mreact_1  |[0m 
+[36mreact_1  |[0m You can now view personal in the browser.
+[36mreact_1  |[0m 
+[36mreact_1  |[0m   Local:            http://localhost:3000
+[36mreact_1  |[0m   On Your Network:  http://172.19.0.2:3000
+[36mreact_1  |[0m 
+[36mreact_1  |[0m Note that the development build is not optimized.
+[36mreact_1  |[0m To create a production build, use npm run build.
+[36mreact_1  |[0m 
+[36mreact_1  |[0m webpack compiled successfully
+[36mreact_1  |[0m Files successfully emitted, waiting for typecheck results...
+[36mreact_1  |[0m Issues checking in progress...
+[36mreact_1  |[0m No issues found.
+Stopping about-me_react_1 ... 
+Killing about-me_react_1  ... 
+Killing about-me_react_1  ... done
+2
+Gracefully stopping... (press Ctrl+C again to force)
