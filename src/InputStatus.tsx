@@ -1,23 +1,23 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback } from "react";
 
 function InputSample() {
   const [text, setText] = useState("");
-  const [inputs, setinputs] = useState({ name: "", nickname: "" });
+  const [inputs, setinputs] = useState({ name: "", nickname: "" }); //여러개의 변수 관리
 
   const nameInput = useRef<HTMLInputElement>(null);
   const { name, nickname } = inputs;
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
-  };
+  }, []);
 
-  const onChange1 = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange1 = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setinputs({
       ...inputs,
       [name]: value,
     });
-  };
+  }, []);
 
   const onReset = () => {
     setText("");
@@ -66,4 +66,4 @@ function InputSample() {
   );
 }
 
-export default InputSample;
+export default React.memo(InputSample);
