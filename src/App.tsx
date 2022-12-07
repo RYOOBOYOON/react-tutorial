@@ -1,4 +1,5 @@
 import React, { useRef, useReducer, useMemo, useCallback } from "react";
+import produce from "immer";
 
 import Hello from "./props";
 import Wrapper from "./frame";
@@ -8,6 +9,9 @@ import InputSample from "./InputStatus";
 import UserList from "./UserList";
 import CreateUser from "./CreateUser";
 import useInputs from "./useInputs";
+
+//componentDidCatch로 에러 잡아내기 Sentry 연동
+import User from "./User";
 
 function countActiveUsers(users: any) {
   console.log("활성 사용자 수를 세는 중...");
@@ -40,20 +44,33 @@ const initialState = {
 function reducer(state: any, action: any) {
   switch (action.type) {
     case "CREATE_USER":
-      return {
-        users: state.users.concat(action.user),
-      };
+      return produce(state, (draft) => {
+        draft.users.push(action.user);
+      });
+    // return {
+    //   users: state.users.concat(action.user),
+    // };
     case "TOGGLE_USER":
-      return {
-        ...state,
-        users: state.users.map((user: any) =>
-          user.id === action.id ? { ...user, active: !user.active } : user
-        ),
-      };
+      return produce(state, (draft) => {
+        const user = draft.users.find((user: any) => user.id === action.id);
+        user.active = !user.active;
+      });
+    // return {
+    //   ...state,
+    //   users: state.users.map((user: any) =>
+    //     user.id === action.id ? { ...user, active: !user.active } : user
+    //   ),
+    // };
     case "REMOVE_USER":
-      return {
-        users: state.users.filter((user: any) => user.id !== action.id),
-      };
+      return produce(state, (draft) => {
+        const index = draft.users.findIndex(
+          (user: any) => user.id === action.id
+        );
+        draft.users.splice(index, 1);
+      });
+    // return {
+    //   users: state.users.filter((user: any) => user.id !== action.id),
+    // };
     default:
       return state;
   }
@@ -86,9 +103,14 @@ function App() {
   }, [username, email, reset]);
   const count = useMemo(() => countActiveUsers(users), [users]);
 
+  const user = {
+    id: 1,
+    username: "velopert",
+  };
+
   return (
     <Wrapper>
-      <Hello name="app.tsx" color="aqua" background="black" isSpecial />
+      <Hello name="잘안돼..." color="aqua" background="black" isSpecial />
       <div className="gray-box">App.css 적용</div>
       <Counter />
       <InputSample />
@@ -104,6 +126,7 @@ function App() {
       <br></br>
       <h2>useMemo 적용</h2>
       <div>활성 사용자 수: {count}</div>
+      <User user={user} />
     </Wrapper>
   );
 }
